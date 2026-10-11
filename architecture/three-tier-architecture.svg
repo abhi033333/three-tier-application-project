@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">AWS Three-Tier WordPress Application Architecture</title>
+<desc id="desc">Internet traffic goes through an Internet Gateway and public Application Load Balancer to WordPress on private EC2 instances, which use Amazon RDS for MySQL in private database subnets. CloudWatch sends alarm actions through SNS.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker><style>.h{font:700 25px sans-serif;fill:#0f172a}.sub{font:600 17px sans-serif;fill:#1e293b}.txt{font:15px sans-serif;fill:#334155}.tiny{font:13px sans-serif;fill:#475569}.edge{stroke:#334155;stroke-width:2.5;fill:none;marker-end:url(#arrow)}.dashed{stroke-dasharray:7 6}</style></defs>
+<rect x="20" y="20" width="1160" height="720" rx="22" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="600" y="60" text-anchor="middle" class="h">AWS Three-Tier WordPress Application</text>
+<rect x="60" y="100" width="1080" height="80" rx="14" fill="#e0f2fe" stroke="#38bdf8"/>
+<text x="600" y="132" text-anchor="middle" class="sub">Public access</text><text x="600" y="157" text-anchor="middle" class="txt">Users / Browser  →  Internet Gateway  →  Application Load Balancer (HTTP :80)</text>
+<rect x="60" y="220" width="1080" height="250" rx="16" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+<text x="85" y="253" class="sub">Application tier · Private subnets · 2 Availability Zones</text>
+<rect x="100" y="280" width="420" height="125" rx="12" fill="#ffffff" stroke="#93c5fd"/><text x="310" y="310" text-anchor="middle" class="sub">EC2 / WordPress</text><text x="310" y="337" text-anchor="middle" class="txt">Amazon Linux 2023 · Apache · PHP</text><text x="310" y="361" text-anchor="middle" class="txt">Target Group health checks</text><text x="310" y="385" text-anchor="middle" class="tiny">Managed through Launch Template + ASG</text>
+<rect x="680" y="280" width="360" height="125" rx="12" fill="#ffffff" stroke="#93c5fd"/><text x="860" y="310" text-anchor="middle" class="sub">NAT Gateway</text><text x="860" y="337" text-anchor="middle" class="txt">Outbound internet for private</text><text x="860" y="360" text-anchor="middle" class="txt">application subnet package updates</text>
+<path d="M600 180 L600 210 L310 210 L310 272" class="edge"/><path d="M520 345 L670 345" class="edge"/><text x="595" y="331" text-anchor="middle" class="tiny">Outbound only</text>
+<rect x="60" y="505" width="1080" height="130" rx="16" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+<text x="85" y="538" class="sub">Database tier · Private DB subnets</text>
+<rect x="340" y="555" width="520" height="58" rx="12" fill="#ffffff" stroke="#86efac"/><text x="600" y="579" text-anchor="middle" class="sub">Amazon RDS for MySQL</text><text x="600" y="601" text-anchor="middle" class="txt">WordPress database · inbound MySQL :3306 from app tier only</text>
+<path d="M310 405 L310 485 L600 485 L600 547" class="edge"/>
+<rect x="60" y="660" width="1080" height="58" rx="12" fill="#fefce8" stroke="#facc15"/><text x="600" y="684" text-anchor="middle" class="sub">Monitoring and alerting</text><text x="600" y="705" text-anchor="middle" class="txt">EC2 CPUUtilization → Amazon CloudWatch Alarm → Amazon SNS → confirmed email/SMS endpoint</text>
+
+</svg>
